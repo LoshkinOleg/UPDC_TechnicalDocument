@@ -1,0 +1,162 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\graphicspath{{./images/}}
+\author{Oleg Loshkin}
+\title{\textbf{UPDC}\\Unity to PokEngine Data Converter\\\textbf{Technical Document}}
+
+\begin{document}
+
+\maketitle
+TODO: more diagrams, add glossary, working bibliography, figure table, add labels to images
+\newpage
+\tableofcontents
+\newpage
+
+\section{Introduction}
+	\begin{itemize}
+		\item \textbf{Project's Context}
+		\\As part of the game programming cursus at SAE Institute Geneva, for the \textbf{technical module GPR5100.2}, students of the second year must \textbf{assist students from the third year in completing their bachelor’s project.}\\ This year, the third year's \textbf{PokFamily team} develops a \textbf{video game for the Switch} and PC using a tailored \textbf{in-house engine}.\\Second year students must \textbf{assist them} by creating various \textbf{tools they will need} in order to create their game.\\This document describes the functioning of the \textbf{Unity to PokEngine Data Converter} tool, \textbf{UPDC} for short.
+		
+		\item \textbf{Project's Goals}
+			\begin{itemize}
+				\item Create a useful tool that the PokFamily team will use to create their video game.
+				
+				\item Learn to work in a non-academic environment in a team that depends on the student’s performance.
+				
+			\end{itemize}
+			
+		\item \textbf{Specific Problem}
+		\\The PokFamily team uses the \textbf{Unity engine as an external editor}. The PokFamily team needs a tool to \textbf{convert ScriptableObjects to a JSON(meaning needed)} format \textbf{readable by the PokEngine} parser.
+	\end{itemize}
+\newpage
+
+\section{Analysis}
+\subsection{Requirements}
+This project’s requirements have two origins:
+\begin{itemize}
+	\item \textbf{Academic requirements}
+		\begin{itemize}
+			\item The task given by the team has been understood and done in time.
+			
+			\item The tool is maintained by the student after the tool's completion.
+			
+			\item The tool must be user-friendly.
+			
+			\item The student understands how to manage data.
+			
+			\item The student understands how a game engine interfaces with a game engine editor.
+			
+			\item The student has organized himself and his work in a way to facilitate the work of others.
+			
+			\item The tool’s performance is reasonable.
+			
+			\item The implementation is appropriately sophisticated.
+			
+			\item The student understands the implications of non-academic teamwork.
+			
+		\end{itemize}
+	\item \textbf{Pragmatic requirements}
+		\begin{itemize}
+			\item Convert ScriptableObject files to files readable by the PokEngine's parser.
+			
+			\item The user must be able to interact with the tool via Unity.
+			
+			\item The code must satisfy the quality and style expected by the team. C++ coding style is defined in the Coding Style Document. C\# coding style is defined in UnityWorkOrganization document.
+			
+			\item The student must communicate with the team appropriately and be dependable.
+			
+			\item Allow other tools to export data via the UPDC.
+			
+	\end{itemize}
+\end{itemize}
+\newpage
+
+\subsection{Technologies Used}
+\begin{itemize}
+	\item \textbf{PokEngine}\\
+		The PokEngine is the game engine developed by the PokFamily team. The engine is written with C++ standard 2017 and C++ standard 2014 for code running on the Nintendo Switch.\\
+The engine has a parser that is capable of reading JSON files. This parser is used to import data exported from Unity with UPDC.
+
+	\item \textbf{Unity 2019.1.10f}\\
+		Unity 2019.1.10f is used as an external editor.
+	
+	\item \textbf{Visual Studio 2017}\\
+		Visual Studio 2017 is used for development of the PokEngine.
+	
+	\item \textbf{Git}\\
+		github.com is used for versioning for the PokEngine source code. gitlab.com is used for versioning for the Unity prototype source code. Git bash is used for most interactions with the git framework. Merge conflicts are solved manually via text editor.
+		
+\end{itemize}
+
+\subsection{Interaction with Overall Project}
+WIP: rework: diagram of my tool in relation to unity + poke + other tools. written explanation as well
+
+\subsection{Other Unity Tools Interactions}
+\begin{enumerate}
+\item Enemy Pattern Tool (Adam): allows to export enemy waves. TODO: brief explanation of tool, data that is exported
+\item Spline tool (Cédric): allows to export Vector3's that define a spline. TODO: idem
+\item Chunk loading/unloading system (Séb): allows to export chunks. TODO: idem
+\end{enumerate}
+
+\section{Execution}
+\subsection{Solution}
+\begin{enumerate}
+	\item UPDC editor is accessible via the MainMenu/Tools/Unity to PokEngine Data Converter. TODO: show don't tell, diagram
+	\item The editor automatically detects .asset files located in folders located in Assets/Data. TODO: add diagram with folder structure
+	\item One or more assets can be selected for batch exporting. TODO: image
+	\item The destination folder for exportation can be selected. TODO: image
+\end{enumerate}
+TODO: UML diagram, Model-View-Controller diagram, files in folder diagram, I/O diagram for tool and where it takes I and O to/from
+
+\subsection{Interface Wireframe}
+TODO: make bigger, label
+\begin{figure} [h]
+%\includegraphics[width=\textwidth]{}
+\end{figure}
+
+\subsection{Data Representation}
+TODO: data can be optimized with export as readable bool, image
+\subsubsection{Generic}
+Generic convertible data is saved as a .json\\ No values are expected in generics.
+\subsubsection{Splines}
+Splines are saved as a .pokspline\\ The contents is an array of vectors of variable size. The array is named "points". The vector's values are named "x", "y" and "z".
+\begin{figure}[h]
+%	\includegraphics{}
+\end{figure}
+\subsubsection{Chunks}
+WIP
+\subsubsection{Enemy Waves}
+WIP
+
+\subsection{Planning}
+The project uses a Scrum approach for day-to-day work. As such, here is the rough planning for the next six weeks available for the completion of this tool project. These six weeks are split between three two-week Sprints.
+
+\begin{enumerate}
+\item First Sprint goal:
+	\begin{enumerate}
+	\item Prototype the tool UI and export a few select ScriptableObject types.
+	\end{enumerate}
+\item Second Sprint goal:
+	\begin{enumerate}
+	\item Implement data conversion for few remainder of ScriptableObject types.
+	\item Allow importation of JSONs PokEngine side.
+	\item Optimize code.
+	\end{enumerate}
+\item Third Sprint goal:
+	\begin{enumerate}
+	\item Polish the UI.
+	\item Genericise and clean the code.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Summary}
+WIP
+TODO Adjust doc following feedback from Elias
+
+\end{document}
