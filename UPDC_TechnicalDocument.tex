@@ -5,19 +5,17 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
 
 \graphicspath{{./images/}}
 \author{Oleg Loshkin}
 \title{\textbf{UPDC}\\Unity to PokEngine Data Converter\\\textbf{Technical Document}}
 
+% TODO: labels, bibli, glossary, figure table
+
 \begin{document}
 
 \maketitle
-TODO: more diagrams, add glossary, working bibliography, figure table, add labels to images
-\newpage
-\tableofcontents
-\newpage
-
 \section{Introduction}
 	\begin{itemize}
 		\item \textbf{Project's Context}
@@ -32,12 +30,11 @@ TODO: more diagrams, add glossary, working bibliography, figure table, add label
 			\end{itemize}
 			
 		\item \textbf{Specific Problem}
-		\\The PokFamily team uses the \textbf{Unity engine as an external editor}. The PokFamily team needs a tool to \textbf{convert ScriptableObjects to a JSON(meaning needed)} format \textbf{readable by the PokEngine} parser.
+		\\The PokFamily team uses the \textbf{Unity engine as an external editor}. The PokFamily team needs a tool to \textbf{convert ScriptableObjects to a JSON} format \textbf{readable by the PokEngine} parser. This tool may then be used by other Unity tools to export data.
 	\end{itemize}
 \newpage
 
-\section{Analysis}
-\subsection{Requirements}
+\section{Requirements}
 This project’s requirements have two origins:
 \begin{itemize}
 	\item \textbf{Academic requirements}
@@ -77,86 +74,70 @@ This project’s requirements have two origins:
 \end{itemize}
 \newpage
 
-\subsection{Technologies Used}
+\section{Technologies Used}
 \begin{itemize}
 	\item \textbf{PokEngine}\\
-		The PokEngine is the game engine developed by the PokFamily team. The engine is written with C++ standard 2017 and C++ standard 2014 for code running on the Nintendo Switch.\\
+		The \textbf{PokEngine} is the game engine developed by the PokFamily team. The engine is \textbf{written with C++ standard 2014} and \textbf{partly C++ standard 2014} for code running on the Nintendo Switch.\\
 The engine has a parser that is capable of reading JSON files. This parser is used to import data exported from Unity with UPDC.
 
 	\item \textbf{Unity 2019.1.10f}\\
-		Unity 2019.1.10f is used as an external editor.
+		Unity 2019.1.10f is used as an \textbf{external editor}.
 	
 	\item \textbf{Visual Studio 2017}\\
 		Visual Studio 2017 is used for development of the PokEngine.
 	
 	\item \textbf{Git}\\
-		github.com is used for versioning for the PokEngine source code. gitlab.com is used for versioning for the Unity prototype source code. Git bash is used for most interactions with the git framework. Merge conflicts are solved manually via text editor.
+		\textbf{github.com} is used for versioning for the \textbf{PokEngine source code}. \textbf{gitlab.com} is used for versioning for the \textbf{Unity prototype source code}. Git bash is used for most interactions with the git framework. Merge conflicts are solved manually via text editor and git bash.
 		
 \end{itemize}
 
-\subsection{Interaction with Overall Project}
-WIP: rework: diagram of my tool in relation to unity + poke + other tools. written explanation as well
+\section{Interaction with Overall Project}
+\begin{center}
+\includegraphics[scale=0.5]{UPDCLocation}
+\end{center}
+UPDC provides other Unity tools to export data to be used by the PokEngine. As such, it is the last chain link that's still part of Unity before said data leaves Unity altogether to integrate the PokEngine side of the project.
 
-\subsection{Other Unity Tools Interactions}
-\begin{enumerate}
-\item Enemy Pattern Tool (Adam): allows to export enemy waves. TODO: brief explanation of tool, data that is exported
-\item Spline tool (Cédric): allows to export Vector3's that define a spline. TODO: idem
-\item Chunk loading/unloading system (Séb): allows to export chunks. TODO: idem
-\end{enumerate}
+\section{UML Diagram}
+\begin{center}
+\includegraphics[scale=0.35]{UPDCUML}
+\end{center}
+\newpage
+\noindent The tool follows a \textbf{Model-View-Controller} model where the model is Unity's data, the view is \texttt{UPDC\_View} and the controller is \texttt{UPDC\_Controller}.\\
+\textbf{ScriptableObjects are used to store user data across sessions}. Said data includes:
+\begin{itemize}
+\item Whether or not to overwrite any existing files upon export.
+\item Whether or not to export the JSON data in a format easily readable by humans, or to prefer optimisation.
+\item Last selected output directory for export.
+\item Default output directory for export.
+\item A dictionary like class to keep track of defined types and extensions managed by the UPDC.
+\end{itemize}
 
-\section{Execution}
-\subsection{Solution}
-\begin{enumerate}
-	\item UPDC editor is accessible via the MainMenu/Tools/Unity to PokEngine Data Converter. TODO: show don't tell, diagram
-	\item The editor automatically detects .asset files located in folders located in Assets/Data. TODO: add diagram with folder structure
-	\item One or more assets can be selected for batch exporting. TODO: image
-	\item The destination folder for exportation can be selected. TODO: image
-\end{enumerate}
-TODO: UML diagram, Model-View-Controller diagram, files in folder diagram, I/O diagram for tool and where it takes I and O to/from
+\section{Tackling Genericity}
+\textbf{UPDC needs to be able to export} various data types that \textbf{aren't well defined in advance}. With project advancement, new types of data may need to be exported besides the ones currently developed by the team. This means that \textbf{the implementation of the tool had to be flexible and not hard-coded}.\\
+The \textbf{tool addresses this constraint by making use of Unity's ScriptableObject class}. ScriptableObjects are Unity's way of handling persistent data and the engine has well developed functionalities for manipulating ScriptableObjects. JSONUtility was used for generating JSON files from ScriptableObject objects for instance. This did however come with the drawback of not being able to ignore empty fields, that are currently written to the JSON file when it would have been preferable to remove these altogether.\\
+\textbf{By using a string to string dictionary} like class (\texttt{TypesAndExtensions\_SO}), UPDC allows to \textbf{add and remove support any new convertible asset types without requiring the user to interact with UPDC's code} provided the type defined inherits from the ScriptableObject class.
 
-\subsection{Interface Wireframe}
-TODO: make bigger, label
-\begin{figure} [h]
-%\includegraphics[width=\textwidth]{}
-\end{figure}
+\section{Tool's UI}
+\begin{center}
+\includegraphics[scale=0.6]{exportUi}
+\end{center}
+\begin{center}
+\includegraphics[scale=0.6]{typesUi}
+\end{center}
 
-\subsection{Data Representation}
-TODO: data can be optimized with export as readable bool, image
-\subsubsection{Generic}
-Generic convertible data is saved as a .json\\ No values are expected in generics.
-\subsubsection{Splines}
-Splines are saved as a .pokspline\\ The contents is an array of vectors of variable size. The array is named "points". The vector's values are named "x", "y" and "z".
-\begin{figure}[h]
-%	\includegraphics{}
-\end{figure}
-\subsubsection{Chunks}
-WIP
-\subsubsection{Enemy Waves}
-WIP
-
-\subsection{Planning}
-The project uses a Scrum approach for day-to-day work. As such, here is the rough planning for the next six weeks available for the completion of this tool project. These six weeks are split between three two-week Sprints.
-
-\begin{enumerate}
-\item First Sprint goal:
-	\begin{enumerate}
-	\item Prototype the tool UI and export a few select ScriptableObject types.
-	\end{enumerate}
-\item Second Sprint goal:
-	\begin{enumerate}
-	\item Implement data conversion for few remainder of ScriptableObject types.
-	\item Allow importation of JSONs PokEngine side.
-	\item Optimize code.
-	\end{enumerate}
-\item Third Sprint goal:
-	\begin{enumerate}
-	\item Polish the UI.
-	\item Genericise and clean the code.
-	\end{enumerate}
-\end{enumerate}
+\section{Potential Improvements}
+\begin{itemize}
+\item Currently the user is required to manually set the default output directory of the tool before use.
+\item A button to remove a given convertible asset from the project directly from the tool's UI would have been a nice addition.
+\item Reliance on Unity's JSON parser implies an inability to easily remove empty objects from the resulting JSON file, which currently contains empty properties for uninitialized objects.
+\item Implementation of an new convertible type still requires the user to create their data structure and store the ScriptableObject instances in the correct folder on their own. It would have been better to provide an automated way to do so.
+\end{itemize}
+\newpage
 
 \section{Summary}
-WIP
-TODO Adjust doc following feedback from Elias
+\textbf{The UPDC tool allows other Unity tools to export Unity data into JSON files} readable by the PokEngine parser and \textbf{it's implementation is flexible enough to quickly integrate new data types}.\\
+This project's \textbf{challenges have been firstly to establish the requirements} of the tool that were left rather nebulous, \textbf{learn to use the Unity's GUI API and AssetDatabase API}. The rest hasn't provided much trouble, time being the only constraint for the remaining tasks.\\
+In addressing the first challenge, this project has provided a great opportunity to get first hand experience in working on a complex future commercial title where clear \textbf{communication is necessary}.
+The second and third challenges of the project have allowed me to practice my \textbf{ability to tackle unknowns}, and manage them to deliver the required product of the required quality and on time.
 
 \end{document}
