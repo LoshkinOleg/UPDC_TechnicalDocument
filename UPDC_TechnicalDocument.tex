@@ -101,9 +101,8 @@ UPDC provides other Unity tools to export data to be used by the PokEngine. As s
 
 \section{UML Diagram}
 \begin{center}
-\includegraphics[scale=0.35]{UPDCUML}
+\includegraphics[scale=0.25]{UPDCUML}
 \end{center}
-\newpage
 \noindent The tool follows a \textbf{Model-View-Controller} model where the model is Unity's data, the view is \texttt{UPDC\_View} and the controller is \texttt{UPDC\_Controller}.\\
 \textbf{ScriptableObjects are used to store user data across sessions}. Said data includes:
 \begin{itemize}
@@ -113,6 +112,7 @@ UPDC provides other Unity tools to export data to be used by the PokEngine. As s
 \item Default output directory for export.
 \item A dictionary like class to keep track of defined types and extensions managed by the UPDC.
 \end{itemize}
+\newpage
 
 \section{Tackling Genericity}
 \textbf{UPDC needs to be able to export} various data types that \textbf{aren't well defined in advance}. With project advancement, new types of data may need to be exported besides the ones currently developed by the team. This means that \textbf{the implementation of the tool had to be flexible and not hard-coded}.\\\\
