@@ -19,7 +19,9 @@
 \section{Introduction}
 	\begin{itemize}
 		\item \textbf{Project's Context}
-		\\As part of the game programming cursus at SAE Institute Geneva, for the \textbf{technical module GPR5100.2}, students of the second year must \textbf{assist students from the third year in completing their bachelor’s project.}\\ This year, the third year's \textbf{PokFamily team} develops a \textbf{video game for the Switch} and PC using a tailored \textbf{in-house engine}.\\Second year students must \textbf{assist them} by creating various \textbf{tools they will need} in order to create their game.\\This document describes the functioning of the \textbf{Unity to PokEngine Data Converter} tool, \textbf{UPDC} for short.
+		\\As part of the game programming cursus at SAE Institute Geneva, for the \textbf{technical module GPR5100.2}, students of the second year must \textbf{assist students from the third year in completing their bachelor’s project.}\\\\
+		This year, the third year's \textbf{PokFamily team} develops a \textbf{video game for the Switch} and PC using a tailored \textbf{in-house engine}.\\Second year students must \textbf{assist them} by creating various \textbf{tools they will need} in order to create their game.\\\\
+		This document describes the functioning of the \textbf{Unity to PokEngine Data Converter} tool, \textbf{UPDC} for short.
 		
 		\item \textbf{Project's Goals}
 			\begin{itemize}
@@ -113,8 +115,8 @@ UPDC provides other Unity tools to export data to be used by the PokEngine. As s
 \end{itemize}
 
 \section{Tackling Genericity}
-\textbf{UPDC needs to be able to export} various data types that \textbf{aren't well defined in advance}. With project advancement, new types of data may need to be exported besides the ones currently developed by the team. This means that \textbf{the implementation of the tool had to be flexible and not hard-coded}.\\
-The \textbf{tool addresses this constraint by making use of Unity's ScriptableObject class}. ScriptableObjects are Unity's way of handling persistent data and the engine has well developed functionalities for manipulating ScriptableObjects. JSONUtility was used for generating JSON files from ScriptableObject objects for instance. This did however come with the drawback of not being able to ignore empty fields, that are currently written to the JSON file when it would have been preferable to remove these altogether.\\
+\textbf{UPDC needs to be able to export} various data types that \textbf{aren't well defined in advance}. With project advancement, new types of data may need to be exported besides the ones currently developed by the team. This means that \textbf{the implementation of the tool had to be flexible and not hard-coded}.\\\\
+The \textbf{tool addresses this constraint by making use of Unity's ScriptableObject class}. ScriptableObjects are Unity's way of handling persistent data and the engine has well developed functionalities for manipulating ScriptableObjects. JSONUtility was used for generating JSON files from ScriptableObject objects for instance. This did however come with the drawback of not being able to ignore empty fields, that are currently written to the JSON file when it would have been preferable to remove these altogether.\\\\
 \textbf{By using a string to string dictionary} like class (\texttt{TypesAndExtensions\_SO}), UPDC allows to \textbf{add and remove support any new convertible asset types without requiring the user to interact with UPDC's code} provided the type defined inherits from the ScriptableObject class.
 
 \section{Tool's UI}
@@ -135,8 +137,8 @@ The \textbf{tool addresses this constraint by making use of Unity's ScriptableOb
 \newpage
 
 \section{Summary}
-\textbf{The UPDC tool allows other Unity tools to export Unity data into JSON files} readable by the PokEngine parser and \textbf{it's implementation is flexible enough to quickly integrate new data types}.\\
-This project's \textbf{challenges have been firstly to establish the requirements} of the tool that were left rather nebulous, \textbf{learn to use the Unity's GUI API and AssetDatabase API}. The rest hasn't provided much trouble, time being the only constraint for the remaining tasks.\\
+\textbf{The UPDC tool allows other Unity tools to export Unity data into JSON files} readable by the PokEngine parser and \textbf{it's implementation is flexible enough to quickly integrate new data types}.\\\\
+This project's \textbf{challenges have been firstly to establish the requirements} of the tool that were left rather nebulous, \textbf{learn to use the Unity's GUI API and AssetDatabase API}. The rest hasn't provided much trouble, time being the only constraint for the remaining tasks.\\\\
 In addressing the first challenge, this project has provided a great opportunity to get first hand experience in working on a complex future commercial title where clear \textbf{communication is necessary}.
 The second and third challenges of the project have allowed me to practice my \textbf{ability to tackle unknowns}, and manage them to deliver the required product of the required quality and on time.
 

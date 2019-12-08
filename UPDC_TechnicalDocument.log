@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  7 DEC 2019 14:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7250 64-bit) (preloaded format=pdflatex 2019.11.24)  8 DEC 2019 09:45
 entering extended mode
 **./UPDC_TechnicalDocument.tex
 (UPDC_TechnicalDocument.tex
@@ -271,27 +271,47 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 21.
- [1
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--25
+
+ []
+
+[1
 
 {C:/Users/admin/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 <./images/UPDCLocation.png, id=12, 923.45pt x 281.05pt>
 File: ./images/UPDCLocation.png Graphic file (type png)
 <use ./images/UPDCLocation.png>
-Package pdftex.def Info: ./images/UPDCLocation.png  used on input line 96.
+Package pdftex.def Info: ./images/UPDCLocation.png  used on input line 98.
 (pdftex.def)             Requested size: 461.72386pt x 140.52464pt.
 <./images/UPDCUML.png, id=14, 1445.4pt x 2037.6125pt>
 File: ./images/UPDCUML.png Graphic file (type png)
 <use ./images/UPDCUML.png>
-Package pdftex.def Info: ./images/UPDCUML.png  used on input line 102.
+Package pdftex.def Info: ./images/UPDCUML.png  used on input line 104.
 (pdftex.def)             Requested size: 505.89758pt x 713.17506pt.
- [3 <./images/UPDCLocation.png>] [4 <./images/UPDCUML.png>]
+
+[3 <./images/UPDCLocation.png>] [4 <./images/UPDCUML.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 118--121
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--121
+
+ []
+
 <./images/exportUi.png, id=23, 943.525pt x 830.10126pt>
 File: ./images/exportUi.png Graphic file (type png)
 <use ./images/exportUi.png>
-Package pdftex.def Info: ./images/exportUi.png  used on input line 122.
+Package pdftex.def Info: ./images/exportUi.png  used on input line 124.
 (pdftex.def)             Requested size: 566.11937pt x 498.0646pt.
 
-Overfull \hbox (40.88148pt too wide) in paragraph at lines 122--123
+Overfull \hbox (40.88148pt too wide) in paragraph at lines 124--125
  [] 
  []
 
@@ -299,29 +319,38 @@ Overfull \hbox (40.88148pt too wide) in paragraph at lines 122--123
 <./images/typesUi.png, id=28, 897.3525pt x 788.9475pt>
 File: ./images/typesUi.png Graphic file (type png)
 <use ./images/typesUi.png>
-Package pdftex.def Info: ./images/typesUi.png  used on input line 125.
+Package pdftex.def Info: ./images/typesUi.png  used on input line 127.
 (pdftex.def)             Requested size: 538.41565pt x 473.37215pt.
 
-Overfull \hbox (13.17776pt too wide) in paragraph at lines 125--126
+Overfull \hbox (13.17776pt too wide) in paragraph at lines 127--128
  [] 
  []
 
-[6 <./images/exportUi.png>] [7 <./images/typesUi.png>] [8]
-(UPDC_TechnicalDocument.aux) ) 
+[6 <./images/exportUi.png>] [7 <./images/typesUi.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 140--144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--144
+
+ []
+
+[8] (UPDC_TechnicalDocument.aux) ) 
 Here is how much of TeX's memory you used:
  3174 strings out of 492450
  42234 string characters out of 3129748
- 112944 words of memory out of 3000000
+ 113944 words of memory out of 3000000
  7498 multiletter control sequences out of 15000+200000
  8482 words of font info for 33 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 51i,6n,34p,680b,192s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on UPDC_TechnicalDocument.pdf (8 pages, 339437 bytes).
+ 51i,6n,34p,571b,192s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+r17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on UPDC_TechnicalDocument.pdf (8 pages, 339456 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
