@@ -77,8 +77,8 @@ This project’s requirements have two origins:
 \section{Technologies Used}
 \begin{itemize}
 	\item \textbf{PokEngine}\\
-		The \textbf{PokEngine} is the game engine developed by the PokFamily team. The engine is \textbf{written with C++ standard 2014} and \textbf{partly C++ standard 2014} for code running on the Nintendo Switch.\\
-The engine has a parser that is capable of reading JSON files. This parser is used to import data exported from Unity with UPDC.
+		The \textbf{PokEngine} is the game engine developed by the PokFamily team. The engine is \textbf{written with C++ standard 2014} and \textbf{partly C++ standard 2017} for code running on the Nintendo Switch.\\
+The engine has a parser that is capable of reading JSON files. This parser is used to import assets exported from Unity with UPDC.
 
 	\item \textbf{Unity 2019.1.10f}\\
 		Unity 2019.1.10f is used as an \textbf{external editor}.
@@ -95,27 +95,36 @@ The engine has a parser that is capable of reading JSON files. This parser is us
 \begin{center}
 \includegraphics[scale=0.5]{UPDCLocation}
 \end{center}
-UPDC provides other Unity tools to export data to be used by the PokEngine. As such, it is the last chain link that's still part of Unity before said data leaves Unity altogether to integrate the PokEngine side of the project.
+\textbf{UPDC allows other Unity tools to export data to be used by the PokEngine}. As such, it is the last chain link that's still part of Unity before said data leaves Unity altogether to integrate the PokEngine's side of the project.
 
 \section{UML Diagram}
 \begin{center}
-\includegraphics[scale=0.25]{UMLUPDC}
+\includegraphics[scale=0.275]{UMLUPDC}
 \end{center}
 \noindent The tool follows a \textbf{Model-View-Controller} model where the model is Unity's data, the view is \texttt{UPDC\_View} and the controller is \texttt{UPDC\_Controller}.\\
 \textbf{ScriptableObjects are used to store user data across sessions}. Said data includes:
 \begin{itemize}
 \item Whether or not to overwrite any existing files upon export.
-\item Whether or not to export the JSON data in a format easily readable by humans, or to prefer optimisation.
-\item Last selected output directory for export.
+\item The output directory for export.
 \item Default output directory for export.
 \item A dictionary like class to keep track of defined types and extensions managed by the UPDC.
+\item A list of substrings to remove from JSON files before writing them to disk.
 \end{itemize}
 \newpage
 
+\section{Folder Hierarchy}
+\begin{center}
+\includegraphics[scale=1.0]{folderStructureUPDC}
+\end{center}
+\textbf{The "Assets/Data" folder is used for storing convertible .asset files}. \textbf{Those stored in folders with the same name as the type} of the convertible asset directly \textbf{under "Assets/Data/someType" are .asset files not linked to any particular scene}.
+\textbf{Those stored in a folder named after a scene are the ones linked to that particular scene}.\\
+In the above example, "LevelConcept" scene may have Spline .asset files linked to it stored under "Assets/Data/LevelConcept/Spline" for instance.\\\\
+The tool's own scripts are located under "Assets/Editor/UPDC". Additionally, a subfolder exists there for storing ScriptableObjects that hold data across sessions under the texttt{"UPDC\_SO"} folder and a "DefaultOutputDir" exists to hold any converted .asset files if no specific output path has been defined before export.
+
 \section{Tackling Genericity}
 \textbf{UPDC needs to be able to export} various data types that \textbf{aren't well defined in advance}. With project advancement, new types of data may need to be exported besides the ones currently developed by the team. This means that \textbf{the implementation of the tool had to be flexible and not hard-coded}.\\\\
-The \textbf{tool addresses this constraint by making use of Unity's ScriptableObject class}. ScriptableObjects are Unity's way of handling persistent data and the engine has well developed functionalities for manipulating ScriptableObjects. JSONUtility was used for generating JSON files from ScriptableObject objects for instance. This did however come with the drawback of not being able to ignore empty fields, that are currently written to the JSON file when it would have been preferable to remove these altogether.\\\\
-\textbf{By using a string to string dictionary} like class (\texttt{TypesAndExtensions\_SO}), UPDC allows to \textbf{add and remove support any new convertible asset types without requiring the user to interact with UPDC's code} provided the type defined inherits from the ScriptableObject class.
+The \textbf{tool addresses this constraint by making use of Unity's ScriptableObject class}. ScriptableObjects are Unity's way of handling persistent data and the engine has well developed functionalities for manipulating ScriptableObjects. JSONUtility was used for generating JSON files from ScriptableObject objects for instance.\\\\
+\textbf{By using a string to string dictionary} like class (\texttt{TypesAndExtensions\_SO}), UPDC allows to \textbf{add and remove support for any convertible asset types without requiring the user to interact with UPDC's code} provided the type defined inherits from the ScriptableObject class.
 
 \section{Working with JSONUtility}
 \textbf{Unity's JSONUtility helper class was used to convert ScriptableObjects into JSON formatted strings} that were then written to disk. Using it meant that \textbf{no custom parser needed to be implemented for this tool, however there were drawbacks in using it later down the line.}\\\\
@@ -140,6 +149,7 @@ The \textbf{tool addresses this constraint by making use of Unity's ScriptableOb
 \section{Potential Improvements}
 \begin{itemize}
 \item Implementation of an new convertible type still requires the user to create their data structure and store the ScriptableObject instances in the correct folder on their own. It would have been better to provide an automated way to do so.
+\item The user still needs to define the aspect of empty fields for them to be removed from the final JSON file, an automated way to do so would have been welcome.
 \end{itemize}
 
 \section{Summary}
